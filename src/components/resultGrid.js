@@ -14,6 +14,17 @@ const StyledGrid = styled.div`
     padding: 1em;
    
 
+  button {
+    outline: none;
+    box-shadow: none;
+    text-decoration: underline;
+    border: none;
+    color: red;
+    margin-top: auto;
+    padding-top: 1em;
+    cursor: pointer;
+    
+  }  
   @media screen and (max-width: 1024px) {
     grid-template-columns: repeat(4, minmax(100px, 1fr));
   }
@@ -51,7 +62,7 @@ const ResultGrid = ({header,children}) => {
 }
 
 ResultGrid.propTypes = {
-  children: PropTypes.array,
+  
   header: PropTypes.string
 }
 

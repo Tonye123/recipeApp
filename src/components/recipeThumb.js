@@ -51,7 +51,7 @@ const RecipeThumb = ({image,title}) => {
         <StyledRecipeThumb>
             <img src={`https://spoonacular.com/recipeImages/${image}`} height={150} alt="food" />
             <div>{title} </div>
-
+           
         </StyledRecipeThumb>
 
     )

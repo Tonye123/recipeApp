@@ -1,17 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import logo from '../images/logo.png'
 
 
 const StyledHeader = styled.header`
 
     background-color: tomato;
     height: 15vh;
+    display: flex;
    
 
     
-    .logo {
+    img.logo {
         padding-left: 2em;
+        height: 5rem;
+        padding-top: 1rem;
     
     }
 
@@ -37,7 +41,7 @@ const StyledHeader = styled.header`
         font-size: 1.5em;
         padding-right: 2em;
         font-family: 'Handlee', cursive;
-    
+        align-self: flex-end;
         
         
     } 
@@ -63,7 +67,9 @@ const StyledHeader = styled.header`
 const Header = () => {
     return(
         <StyledHeader>
-            <Link to={`/`} className="logo" >Food Recipe App</Link>
+            <figure>
+            <Link to={`/`}  ><img className="logo" src={logo} alt="logo" /></Link>
+            </figure>
             <nav>
                  
                  <li className="recipes"><Link to={`/myRecipes/`}>My Recipes</Link></li>

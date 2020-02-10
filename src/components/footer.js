@@ -5,6 +5,8 @@ const StyledDiv = styled.div`
     background: #2d2926ff;
     color: white;
     padding: 10px;
+    margin-top: auto;
+  
  
 
 `
@@ -14,7 +16,7 @@ const StyledDiv = styled.div`
 const Footer = () => {
     return(
         <StyledDiv>
-           <p>Copyright - 2020 Yummy Food App</p>     
+           <p>Copyright &copy; 2020 Food Recipe App</p>     
            <p>Powered by <a href={`www.spoonacular.com`}>spoonacular</a></p>
         </StyledDiv>
     )

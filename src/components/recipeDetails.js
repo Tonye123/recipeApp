@@ -2,6 +2,7 @@ import React, {useEffect, useState, useContext} from 'react';
 import styled from 'styled-components';
 import Spinner from './spinner'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 import { FavoriteContext } from './favoriteContext'
 
@@ -51,13 +52,13 @@ const StyledDiv = styled.div`
         
         padding: 10px 10px;
         
-        background-color: #343148ff;
+        background-color: #528854;
         color: white;
         border: 1px solid #2D2926FF;
         border-radius: 6px;
         font-size: 1.2em;
         font-family:'Open Sans', sans-serif;
-     
+        border: none;    
         outline: none;
         cursor: pointer;
     } 
@@ -67,8 +68,12 @@ const StyledDiv = styled.div`
         cursor: not-allowed; 
     }
 
-    .butDiv p {
-        color: tomato ;
+ 
+
+    a {
+        color: tomato;
+        cursor: pointer;
+        padding-top: 0.5em;
     }
    
    @media only screen and (max-width:1095px) {
@@ -112,7 +117,7 @@ const RecipeDetails = ({ match }) => {
 async function fetchItem() {
     
     setLoading(true)
-    const API_KEY = 'e2503824659e4917a82127bf759df719'
+    const API_KEY = process.env.REACT_APP_KEY
     const result = await fetch( `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=${API_KEY}`, {
         method: 'GET',
         headers: {
@@ -147,22 +152,39 @@ async function fetchItem() {
       
 
 }
-    useEffect(()=>{
-        fetchItem()
-        .catch((error)=> {
+    // useEffect(()=>{
+    //     fetchItem()
+       
+    // },[])
+
+    useEffect(()=> {
+        if(localStorage[id]) {
+          setRecipe(JSON.parse(localStorage[id]))
+          setLoading(false)
+        } else { 
+          fetchItem()
+          .catch((error)=> {
             setLoading(false);
             setError(error.message) 
         
         })
 
-    },[])
+        }
+        
+      },[id])
+  
+      useEffect(()=>{
+        localStorage.setItem(id, JSON.stringify(recipe))
+  
+      },[id,recipe])
+
 
     const { time, ingredients,image,title,instructions} = recipe
     
     
     const handleClick = () => {
+        console.log(favorite)
         const resultFind = favorite.find(({foodId}) => foodId === id)
-        console.log(resultFind)
         if(resultFind){
             setClick(true)
             return
@@ -170,13 +192,14 @@ async function fetchItem() {
         setFavorite(fav => [ ...fav, {title,image,foodId:id}])
         setClick(true)
     }
+   
      
     return(
         <StyledDiv>
-            { isLoading && <Spinner />}
+            { isLoading  ?  <Spinner /> : <>
             <div>
                 <h1>{title}</h1>
-                <img src={image} />
+                <img src={image} alt={`${title}`}/>
             </div>
             
             <div className="ingDiv">
@@ -191,14 +214,15 @@ async function fetchItem() {
                 <p>{instructions}</p>
             </div>
             <div className="butDiv">
-    <button onClick={handleClick} disabled={isClicked} >Add to my Recipes</button>
-            {isClicked && <p>Added to My Recipes</p>}
-            </div>
+    <button onClick={handleClick} disabled={isClicked} >Add to My Recipes</button>
+            {isClicked && <Link to={"/myRecipes/"}>Added to My Recipes</Link>}
+            </div> </> }
             
            
             
             
-                {error ? <p>{error}</p> : null}       
+               {error ? <p>{error}</p> : null} 
+                 
 
         </StyledDiv>
     )
