@@ -79,6 +79,7 @@ function Home() {
     setInput(e.target.value)
   }
   
+  console.log('recipes:' + recipes)
   return (
     <div>
         

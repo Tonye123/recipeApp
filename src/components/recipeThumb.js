@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import NoImage from '../images/noimage.png'
 
 const StyledRecipeThumb = styled.div`
   img {
@@ -36,7 +37,8 @@ const StyledRecipeThumb = styled.div`
 
 
 const RecipeThumb = ({image,title}) => {
-    
+   
+    if(!image) { image = NoImage}
     let img = JSON.stringify(image)
     if(img.indexOf("/") !== -1){ 
     let imgNameIndex = img.lastIndexOf("/") + 1;
