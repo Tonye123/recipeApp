@@ -1,18 +1,17 @@
-import React from 'react'
-import styled from 'styled-components'
-import PropTypes from 'prop-types'
+import React from "react";
+import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const StyledHeader = styled.h1`
-    padding: 1em;
-`
+  padding: 1em;
+`;
 
 const StyledGrid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-column-gap: 10px;
-    grid-row-gap: 60px;
-    padding: 1em;
-   
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 60px;
+  padding: 1em;
 
   button {
     outline: none;
@@ -23,8 +22,7 @@ const StyledGrid = styled.div`
     margin-top: auto;
     padding-top: 1em;
     cursor: pointer;
-    
-  }  
+  }
   @media screen and (max-width: 1024px) {
     grid-template-columns: repeat(4, minmax(100px, 1fr));
   }
@@ -40,30 +38,19 @@ const StyledGrid = styled.div`
   @media screen and (max-width: 375px) {
     grid-template-columns: repeat(1, 1fr);
   }
-
-  
-
 `;
 
-
-
-
-
-const ResultGrid = ({header,children}) => {
-    return(
-        <>
-        {header && <StyledHeader>{header}</StyledHeader>}
-        <StyledGrid>
-            
-              {children}
-        </StyledGrid>
-        </>
-    )
-}
+const ResultGrid = ({ header, children }) => {
+  return (
+    <>
+      {header && <StyledHeader>{header}</StyledHeader>}
+      <StyledGrid>{children}</StyledGrid>
+    </>
+  );
+};
 
 ResultGrid.propTypes = {
-  
   header: PropTypes.string
-}
+};
 
 export default ResultGrid;
